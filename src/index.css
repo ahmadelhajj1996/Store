@@ -1,0 +1,18 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  * {
+    /* @apply bg-[#2D3A2D] text-[#F2F4F0]    ; */
+  }
+}
+
+@layer components {
+  .bg-color {
+    @apply bg-cyan-600;
+  }
+  .bordered {
+    @apply border-[1px] border-cyan-600;
+  }
+}
