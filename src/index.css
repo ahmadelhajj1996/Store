@@ -1,0 +1,21 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  * {
+    /* @apply bg-gray-50  ; */
+  }
+}
+
+@layer components {
+  .bg-color {
+    @apply bg-cyan-600;
+  }
+  .bordered {
+    @apply border-[1px] border-cyan-600;
+  }
+  .container {
+    @apply px-4  sm:px-8 py-6
+  }
+}
