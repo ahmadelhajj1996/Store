@@ -8,7 +8,7 @@ export default function Productcomponent({
   price,
   // badge = "#1 Most viewed",
   // onAddToCart,
-  onFavorite,
+  // onFavorite,
   onShare,
   onClick, // ✅ NEW
   isFavorite = false,
@@ -66,7 +66,7 @@ export default function Productcomponent({
         </div>
 
           <div className="absolute right-2 top-1 z-20 flex flex-col gap-2">
-            <button
+            {/* <button
               type="button"
               onClick={onFavorite}
               className="
@@ -81,7 +81,7 @@ export default function Productcomponent({
                   isFavorite ? "fill-red-500 text-red-500" : "text-gray-700"
                 }
               />
-            </button>
+            </button> */}
 
             <button
               type="button"
