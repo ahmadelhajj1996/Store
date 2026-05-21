@@ -366,12 +366,12 @@ function Login() {
               ))}
             </div>
 
-            <button
+            {/* <button
               onClick={handleLogout}
               className="button mt-12    flex   items-center justify-center gap-2 py-3  text-lg  disabled:cursor-not-allowed disabled:opacity-50"
             >
               تسجيل الخروج
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
