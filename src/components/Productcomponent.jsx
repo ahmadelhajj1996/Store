@@ -83,7 +83,7 @@ export default function Productcomponent({
               />
             </button> */}
 
-            <button
+            {/* <button
               type="button"
               className="
               rounded-full border border-gray-200
@@ -93,7 +93,7 @@ export default function Productcomponent({
               onClick={onShare}
             >
               <Share2 size={16} className="text-gray-700" />
-            </button>
+            </button> */}
           </div>
 
         {/* DOTS */}
