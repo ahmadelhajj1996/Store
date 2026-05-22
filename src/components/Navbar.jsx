@@ -31,7 +31,7 @@ function Navbar() {
       dispatch(logout());
       localStorage.clear();
 
-      navigate("/login");
+      // navigate("/login");
       notify("تم تسجيل الخروج", "success");
     } catch (error) {
       console.error("Logout error:", error.message);
