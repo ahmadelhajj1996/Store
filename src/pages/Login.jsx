@@ -49,8 +49,7 @@ function Login() {
   const handleLogin = async (values, { resetForm, setSubmitting }) => {
     try {
       const response = await axios.post(
-        // "https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/login",
-        "http://127.0.0.1:8000/api/client/login",
+        "https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/login",
 
         values,
       );
@@ -80,8 +79,7 @@ function Login() {
   const handleRegister = async (values, { resetForm, setSubmitting }) => {
     try {
       const response = await axios.post(
-        // "https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/register",
-        "http://127.0.0.1:8000/api/client/register",
+        "https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/register",
         values,
       );
 
