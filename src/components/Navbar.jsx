@@ -4,120 +4,117 @@ import axios from "axios";
 import notify from "../utils/toastr";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { logout  } from "../store/authSlice";
+import { logout } from "../store/authSlice";
+
+/* ---------------- CONFIG ---------------- */
+const API_BASE =
+  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+
 function Navbar() {
   const navigate = useNavigate();
-
-  const { token, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  const { token, user } = useSelector((state) => state.auth);
+
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleNavigate = () => {
-    user ? setOpen(!open) : navigate("/login");
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    setOpen((prev) => !prev);
   };
 
   const handleLogout = async () => {
+    if (loading) return;
+
+    setLoading(true);
+
     try {
       await axios.post(
-        "https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/logout", 
-        null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        `${API_BASE}/client/logout`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       dispatch(logout());
-
       localStorage.clear();
 
-      navigate("/login");
-      notify("تم تسجيل الخروج ", "success");
+      setOpen(false);
+
+      notify("تم تسجيل الخروج", "success");
+
+      navigate("/login", { replace: true });
     } catch (error) {
-      console.error("Logout error:", error.message);
+      console.error("Logout error:", error?.response?.data || error.message);
+
+      // still force logout locally for safety
+      dispatch(logout());
+      localStorage.clear();
+      setOpen(false);
+      navigate("/login", { replace: true });
+
+      notify("حدث خطأ أثناء تسجيل الخروج", "error");
     } finally {
-      close();
+      setLoading(false);
     }
   };
 
   return (
     <>
-      <div className="w-full bg-white  py-6  ">
+      <div className="w-full bg-white py-6">
+        {/* ---------------- MOBILE ---------------- */}
         <div className="sm:hidden">
-          <div className={`px-2 sm:px-4 flex justify-between`}>
+          <div className="px-2 sm:px-4 flex justify-between">
             <h1
-              className=" font-bold text-2xl -mt-1 text-cyan-600 cursor-pointer"
+              className="font-bold text-2xl -mt-1 text-cyan-600 cursor-pointer"
               onClick={() => navigate("/")}
             >
               Logo
             </h1>
 
-            <div className=" flex justify-between gap-x-3 sm:gap-x-4">
-              {/* <Link to={"search"}>
-                <Search color="#0891b2" />
-              </Link> */}
-
-              <div className=" cursor-pointer" onClick={handleNavigate}>
+            <div className="flex gap-x-3">
+              <div className="cursor-pointer" onClick={handleNavigate}>
                 <CircleUser color="#0891b2" />
               </div>
 
-              <Link to={"cart"}>
+              <Link to="/cart">
                 <ShoppingCart size={24} color="#0891b2" />
               </Link>
-              <Link to={"favorites"}>
+
+              <Link to="/favorites">
                 <Heart color="#0891b2" />
               </Link>
             </div>
           </div>
-          {/* {
-            bool && 
-                      <div className="flex justify-between px-6  py-1 placeholder:text-cyan-600 text-xs min-[300px]:text-sm  mx-4   mt-6   rounded-full bordered ">
-            <input
-              type="text"
-              placeholder="ابحث عن منتجك المفضل"
-              className="px-0 py-0 text-sm  font-lighter   w-full border-0 p-2 focus:outline-none focus:ring-0  focus:border-blue-600 placeholder:text-cyan-600 "
-            />
-            <div className="cursor-pointer   text-xl text-cyan-600" onClick={() => { setMessage(''); }}>x</div>
-          </div>
-          } */}
         </div>
 
-        <div className=" hidden sm:flex ">
-          <div className=" px-8 flex justify-between items-center w-full  ">
+        {/* ---------------- DESKTOP ---------------- */}
+        <div className="hidden sm:flex">
+          <div className="px-8 flex justify-between items-center w-full">
             <h1
-              className=" font-bold text-2xl -mt-1 text-cyan-600 cursor-pointer"
+              className="font-bold text-2xl text-cyan-600 cursor-pointer"
               onClick={() => navigate("/")}
             >
-              {" "}
               Logo
             </h1>
 
-            {/* <div className="flex justify-between px-6  py-1 placeholder:text-cyan-600 text-xs sm:text-sm   w-[60%] md:w-[40%]      rounded-full bordered ">
-              <input
-                value={message}
-                onChange={changeInput}
-                type="text"
-                placeholder="ابحث عن منتجك المفضل"
-                className="px-0 py-0 text-sm  font-lighter   w-full border-0 p-2 focus:outline-none focus:ring-0  focus:border-blue-600 placeholder:text-cyan-600 "
-              />
-              <div
-                className="cursor-pointer text-xl text-cyan-600"
-                onClick={() => {
-                  setMessage("");
-                }}
-              >
-                x
-              </div>
-            </div> */}
-            <div className=" flex justify-between gap-x-3 sm:gap-x-4">
-              <div className=" cursor-pointer" onClick={handleNavigate}>
+            <div className="flex gap-x-4">
+              <div className="cursor-pointer" onClick={handleNavigate}>
                 <CircleUser color="#0891b2" />
               </div>
 
-              <Link to={"cart"}>
+              <Link to="/cart">
                 <ShoppingCart size={24} color="#0891b2" />
               </Link>
-              <Link to={"favorites"}>
+
+              <Link to="/favorites">
                 <Heart color="#0891b2" />
               </Link>
             </div>
@@ -125,24 +122,24 @@ function Navbar() {
         </div>
       </div>
 
+      {/* ---------------- DRAWER ---------------- */}
       {open && (
         <>
-          {open && <div className="fixed inset-0  z-40 bg-black/40" />}
+          <div
+            className="fixed inset-0 z-40 bg-black/40"
+            onClick={() => setOpen(false)}
+          />
 
-          {/* DRAWER */}
           <div
             className={`
-          fixed z-50 top-30 sm:top-32 h-full w-[240px]
-          bg-white shadow-xl transition-transform duration-300
-
-          ${open ? "translate-x-0" : "translate-x-full"}
-
-          right-0 sm:left-0 sm:right-auto
-          sm:${open ? "translate-x-0" : "-translate-x-full"}
-        `}
+              fixed z-50 top-24 h-full w-[240px]
+              bg-white shadow-xl transition-transform duration-300
+              right-0
+              ${open ? "translate-x-0" : "translate-x-full"}
+            `}
           >
-            <div className="flex items-center justify-between p-3 bordered border-t-0 border-x-0">
-              <span className=" name text-base">{user?.name} </span>
+            <div className="flex items-center justify-between p-3 border-b">
+              <span className="text-base">{user?.name}</span>
 
               <button
                 onClick={() => setOpen(false)}
@@ -152,25 +149,24 @@ function Navbar() {
               </button>
             </div>
 
-            <div className="p-3  overflow-y-auto  flex flex-col gap-y-6 py-6 text-sm ">
+            <div className="p-3 flex flex-col gap-y-6 py-6 text-sm">
               <div
                 onClick={() => {
                   navigate("/orders");
                   setOpen(false);
                 }}
-                className=" cursor-pointer"
+                className="cursor-pointer"
               >
                 طلباتي
               </div>
-              <div
-                onClick={() => {
-                  handleLogout();
-                  setOpen(false);
-                }}
-                className=" button text-center border-red-500 hover:bg-red-600 hover:text-white text-red-500 hover: cursor-pointer"
+
+              <button
+                disabled={loading}
+                onClick={handleLogout}
+                className="border border-red-500 text-red-500 hover:bg-red-600 hover:text-white py-2 rounded transition disabled:opacity-50"
               >
-                تسجيل الخروج
-              </div>
+                {loading ? "جاري تسجيل الخروج..." : "تسجيل الخروج"}
+              </button>
             </div>
           </div>
         </>
