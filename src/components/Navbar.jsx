@@ -131,9 +131,9 @@ function Navbar() {
 
           <div
             className={`
-              fixed z-50 top-24 h-full w-[240px]
+              fixed z-50 top-30 sm:top-32 h-full w-[240px]
               bg-white shadow-xl transition-transform duration-300
-              right-0
+              end-0
               ${open ? "translate-x-0" : "translate-x-full"}
             `}
           >
