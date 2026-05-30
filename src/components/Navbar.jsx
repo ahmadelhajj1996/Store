@@ -22,11 +22,16 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/logout", null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+     await axios.post(
+  "https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/logout",
+  {},
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+    },
+  }
+);
 
       dispatch(logout());
       localStorage.clear();
