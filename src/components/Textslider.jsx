@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import TopLoader from "./loaders/TopLoader";
@@ -49,54 +48,3 @@ TextSlider.propTypes = {
 };
 
 export default TextSlider;
-=======
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import TopLoader from "./loaders/TopLoader";
-
-function TextSlider({ items = [], interval = 3000, className = "", loading }) { 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (!items.length) return;
-
-    const id = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % items.length);
-    }, interval);
-
-    return () => clearInterval(id);
-  }, [items, interval]);
-
-  if (loading) {
-    return (
-      <TopLoader
-        className=" grid-cols-1  sm:grid-cols-1 w-full"
-        cols={1}
-        num={1}
-      />
-    );
-  }
-
-  return (
-    <div
-      className={`w-full flex justify-center items-center bg-color ${className}`}
-    >
-      <div
-        key={currentIndex}
-        className="text-white py-3 sm:py-4 text-xs sm:text-sm font-semibold transform transition-all animate-slide-in"
-      >
-        {items[currentIndex]}
-      </div>
-    </div>
-  );
-}
-
-TextSlider.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string),
-  interval: PropTypes.number,
-  className: PropTypes.string,
-  loading: PropTypes.bool,
-};
-
-export default TextSlider;
->>>>>>> 465cc3141e38c8c834add71a04812074070966dd

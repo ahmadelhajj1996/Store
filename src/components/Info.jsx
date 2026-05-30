@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { ArrowRight } from "lucide-react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
@@ -24,30 +23,3 @@ Info.propTypes = {
   title: PropTypes.node.isRequired,
   back: PropTypes.bool,
 };
-=======
-import { ArrowRight } from "lucide-react";
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-function Info({ title, back = false }) {
-  const navigate = useNavigate();
-  return (
-    <div className="  absolute   z-50 p-7 ps-12 flex gap-x-3 items-center  text-amber-950 text-lg ">
-      {back && (
-        <ArrowRight
-          onClick={() => navigate(-1)}
-          size={20}
-          className=" mt-1 cursor-pointer"
-        />
-      )}
-      {title}
-    </div>
-  );
-}
-
-export default Info;
-
-Info.propTypes = {
-  title: PropTypes.node.isRequired,
-  back: PropTypes.bool,
-};
->>>>>>> 465cc3141e38c8c834add71a04812074070966dd
