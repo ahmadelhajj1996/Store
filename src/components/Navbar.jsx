@@ -22,6 +22,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
+      console.log("TOKEN:", token);
      await axios.post(
   "https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/logout",
   {},
