@@ -350,9 +350,9 @@
                   {attributesGrouped.map((group) => (
                     <div key={group.attributeName} className="relative">
                       {/* Inline Form Error Messaging */}
-                      <p className="text-xs text-red-600 absolute -top-4">
+                      {/* <p className="text-xs text-red-600 absolute -top-4">
                         {message}
-                      </p>
+                      </p> */}
 
                       <div className="relative">
                         <h3 className="mb-4 price text-sm">
