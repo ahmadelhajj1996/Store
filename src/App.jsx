@@ -32,7 +32,7 @@ function AppContent() {
             <AppRoutes />
           </main>
 
-          {/* <Footer /> */}
+           <Footer /> 
         </div>
         <Backtop />
         <ToastContainer
