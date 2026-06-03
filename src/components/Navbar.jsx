@@ -152,7 +152,7 @@ function Navbar() {
                       </div>
                     </div>
 
-                    <div className="p-4 border-t bg-gray-50">
+                    <div className="-p-4 border-t bg-gray-50">
                       {/* Using onTouchEnd guarantees execution on physical devices before unmount loops target click */}
                       <button
                         type="button"
