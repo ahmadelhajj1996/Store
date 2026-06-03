@@ -18,7 +18,7 @@ function Navbar() {
   const [searchFocused, setSearchFocused] = useState(false);
 
   const menuRef = useRef(null);
-  
+
   // ✅ Pass the active target explicitly to stop accidental global tracking
   useOutsideClick(menuRef, () => setOpen(false), open);
 
@@ -38,9 +38,9 @@ function Navbar() {
   const handleLogout = async (e) => {
     if (e) {
       e.preventDefault();
-      e.stopPropagation(); 
+      e.stopPropagation();
     }
-    
+
     // Cache the active token securely before modifying UI layouts
     const activeToken = token;
 
@@ -59,7 +59,7 @@ function Navbar() {
     // Detached execution preserves backend session state regardless of device unmount cycles.
     if (activeToken) {
       try {
-        await axios.post("https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/logout", null, {
+        await axios.post("http://127.0.0.1:8000/api/client/logout", null, {
           headers: {
             Authorization: `Bearer ${activeToken}`,
           },
@@ -85,7 +85,7 @@ function Navbar() {
   return (
     <div className="w-full bg-white py-6 relative">
       {/* ================= MOBILE ================= */}
-      <div 
+      <div
         className="md:hidden"
         onClick={() => {
           if (searchFocused) setSearchFocused(false);
@@ -110,18 +110,18 @@ function Navbar() {
                 >
                   <CircleUser color="#0891b2" />
                 </button>
-
                 {open && user && (
                   <div
-                    ref={menuRef} 
+                    ref={menuRef}
                     className="
-                      fixed top-0 right-0 h-screen w-64
-                      bg-white shadow-2xl border-l
-                      z-50 flex flex-col justify-between
-                      animate-in slide-in-from-right duration-200
-                    "
-                    onClick={(e) => e.stopPropagation()} 
+      fixed top-0 right-0 h-screen w-64
+      bg-white shadow-2xl border-l
+      z-50 flex flex-col justify-between  {/* This controls the top/bottom split */}
+      animate-in slide-in-from-right duration-200
+    "
+                    onClick={(e) => e.stopPropagation()}
                   >
+                    {/* --- TOP CONTAINER --- */}
                     <div>
                       <div className="flex items-center justify-between p-4 border-b">
                         <span className="font-medium text-gray-700 text-base truncate max-w-[180px]">
@@ -140,7 +140,6 @@ function Navbar() {
                       </div>
 
                       <div className="p-4 flex flex-col gap-y-4 text-sm">
-                        {/* ✅ Fixed: Handled via handleNavigation with touch interception */}
                         <button
                           type="button"
                           onClick={(e) => handleNavigation("/orders", e)}
@@ -150,11 +149,12 @@ function Navbar() {
                           طلباتي
                         </button>
                       </div>
-
-                    
-
-                    <div className="-p-4 border-t bg-gray-50">
-                      {/* Using onTouchEnd guarantees execution on physical devices before unmount loops target click */}
+                    </div>{" "}
+                    {/* ✅ Correctly closed top container right here */}
+                    {/* --- BOTTOM CONTAINER --- */}
+                    <div className="p-4 border-t bg-gray-50">
+                      {" "}
+                      {/* 💡 Also fixed "-p-4" typo to "p-4" */}
                       <button
                         type="button"
                         onClick={handleLogout}
@@ -163,7 +163,6 @@ function Navbar() {
                       >
                         تسجيل الخروج
                       </button>
-                    </div>
                     </div>
                   </div>
                 )}
@@ -181,9 +180,9 @@ function Navbar() {
         )}
 
         {/* SEARCHBAR CONTAINER */}
-        <div 
+        <div
           className={`px-3 ${searchFocused ? "pt-0" : "pt-4"}`}
-          onClick={(e) => e.stopPropagation()} 
+          onClick={(e) => e.stopPropagation()}
         >
           <SearchBar onFocusChange={setSearchFocused} />
         </div>
@@ -205,9 +204,9 @@ function Navbar() {
 
           <div className="flex justify-end gap-x-3 items-center">
             <div className="relative">
-              <button 
+              <button
                 type="button"
-                onClick={handleUserClick} 
+                onClick={handleUserClick}
                 className="cursor-pointer block bg-transparent border-0 p-1 rounded-full hover:bg-gray-50"
               >
                 <CircleUser color="#0891b2" />
@@ -215,7 +214,7 @@ function Navbar() {
 
               {open && user && (
                 <div
-                  ref={menuRef} 
+                  ref={menuRef}
                   className="
                     absolute left-0 mt-2 w-56
                     bg-white shadow-xl border rounded-lg
