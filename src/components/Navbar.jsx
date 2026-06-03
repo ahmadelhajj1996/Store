@@ -114,7 +114,7 @@ function Navbar() {
                   <div
                     ref={menuRef}
                     className="
-      fixed top-0 right-0 h-screen w-64
+      fixed top-0 right-0 h-full w-64
       bg-white shadow-2xl border-l
       z-50 flex flex-col justify-between  {/* This controls the top/bottom split */}
       animate-in slide-in-from-right duration-200
