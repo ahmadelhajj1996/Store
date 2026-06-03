@@ -56,16 +56,12 @@ function Category() {
     }
   };
 
-  // Determine if it is a fresh initial load or just a subcategory query reload
   const isInitialParentLoading = isLoading && persistentChilds.length === 0;
   const isSubCategoryFiltering = isLoading && persistentChilds.length > 0;
 
   return (
     <>
-      {/* =========================================================================
-          PART 1: CATEGORY NAVIGATION BUTTONS BAR
-          ========================================================================= */}
-      <div className="py-4 md:py-8 px-2 md:px-4 grid gap-2 grid-cols-2 xs:grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8">
+       <div className="py-4 md:py-8 px-2 md:px-4 grid gap-2 grid-cols-2 xs:grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8">
         {isInitialParentLoading ? (
           <TopLoader
             num={8}
@@ -75,7 +71,6 @@ function Category() {
           />
         ) : (
           <>
-            {/* Optional "All Products" Button reset toggle */}
             <button
               className={`rounded-lg py-2 text-xs border transition-all duration-200 ${
                 !categoryId
@@ -113,11 +108,9 @@ function Category() {
         )}
       </div>
 
-      {/* =========================================================================
-          PART 2: PRODUCTS MATRIX VIEWPORT (Skeleton Loading / Render Data)
-          ========================================================================= */}
-      {isInitialParentLoading || isSubCategoryFiltering ? (
-        <div className="px-2 md:px-4 grid grid-cols-1 gap-4 xs:grid-cols-2 sm:grid-cols-3 sm:gap-x-4 gap-y-6 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+
+       {isInitialParentLoading || isSubCategoryFiltering ? (
+        <div className="px-2 md:px-4 grid grid-cols-3 gap-4  sm:grid-cols-4 sm:gap-x-5 gap-y-6 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8">
           {Array.from({ length: 6 }).map((_, idx) => (
             <div key={idx} className="w-full flex flex-col gap-3">
               <TopLoader num={1} cols={1} height="200px" className="w-full rounded-lg bg-inherit" />
@@ -127,7 +120,7 @@ function Category() {
           ))}
         </div>
       ) : (
-        <div className="px-2 md:px-4 grid grid-cols-1 gap-4 xs:grid-cols-2 sm:grid-cols-3 sm:gap-x-4 gap-y-6 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        <div className="px-2 md:px-4 grid grid-cols-3 gap-4  sm:grid-cols-4 sm:gap-x-5 gap-y-6 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8">
           {products.length > 0 ? (
             products.map((item, index) => (
               <div key={item.id || index} className="w-full">
