@@ -3,7 +3,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        xs: "300px",
+        xs: "400px",
       },
       keyframes: {
         shimmer: {
