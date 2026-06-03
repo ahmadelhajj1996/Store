@@ -59,7 +59,7 @@ function Navbar() {
     // Detached execution preserves backend session state regardless of device unmount cycles.
     if (activeToken) {
       try {
-        await axios.post("http://127.0.0.1:8000/api/client/logout", null, {
+        await axios.post("https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/logout", null, {
           headers: {
             Authorization: `Bearer ${activeToken}`,
           },
