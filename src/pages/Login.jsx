@@ -14,9 +14,9 @@ import { setCredentials } from "../store/authSlice";
 import notify from "../utils/toastr";
 import { loginSchema, registerSchema } from "../utils/validator";
 
-// const API = "https://phplaravel-1626350-6427540.cloudwaysapps.com/api";
+const API = "https://phplaravel-1626350-6427540.cloudwaysapps.com/api";
 
-const API = "http://127.0.0.1:8000/api";
+// const API = "http://127.0.0.1:8000/api";
 
 
 
