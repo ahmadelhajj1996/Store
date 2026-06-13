@@ -61,7 +61,7 @@ function Navbar() {
     // Detached execution preserves backend session state regardless of device unmount cycles.
     if (activeToken) {
       try {
-        await axios.post("https://phplaravel-1626350-6427540.cloudwaysapps.com/api/client/logout", null, {
+        await axios.post("http://127.0.0.1:8000/api/client/logout", null, {
           headers: {
             Authorization: `Bearer ${activeToken}`,
           },
@@ -116,11 +116,11 @@ function Navbar() {
                   <div
                     ref={menuRef}
                     className="
-      fixed top-0 right-0 h-screen w-64
-      bg-white shadow-2xl border-l
-      z-50 flex flex-col justify-between  {/* This controls the top/bottom split */}
-      animate-in slide-in-from-right duration-200
-    "
+                        fixed top-0 right-0 h-full w-64
+                        bg-white shadow-2xl border-l
+                        z-50 flex flex-col justify-between  {/* This controls the top/bottom split */}
+                        animate-in slide-in-from-right duration-200
+                      "
                     onClick={(e) => e.stopPropagation()}
                   >
                     {/* --- TOP CONTAINER --- */}
@@ -173,7 +173,7 @@ function Navbar() {
               <Link to="/cart" className="p-1 relative">
                 <ShoppingCart size={24} color="#0891b2" />
                 <div className=" absolute -top-2 start-0 px-1 py-0 text-xs bg-red-600 rounded-full text-white">
-                  {cart.length > 0 ? cart.length : ''}
+                  {cart.length > 0 ? cart.length : ""}
                 </div>
               </Link>
 
@@ -263,7 +263,7 @@ function Navbar() {
             <Link to="/cart" className="p-1 relative">
               <ShoppingCart size={24} color="#0891b2" />
               <div className=" absolute -top-2 start-0 px-1 py-0 text-xs bg-red-600 rounded-full text-white">
-                {cart.length > 0 ? cart.length : ''}
+                {cart.length > 0 ? cart.length : ""}
               </div>
             </Link>
 
