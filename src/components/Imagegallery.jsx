@@ -59,7 +59,7 @@ function Imagegallery({
           {/* ========================================================== */}
           {/* FLOATING ACTION UTILITIES (HEART & SHARE)                */}
           {/* ========================================================== */}
-          <div className="absolute top-3 right-3 z-30 flex flex-col gap-y-2">
+          <div className="absolute top-3 right-1.5 z-30 flex flex-col gap-y-2">
             <button
               onClick={(e) => {
                 e.stopPropagation(); // Prevents clicking the action button from triggering parent click handlers
@@ -69,7 +69,7 @@ function Imagegallery({
               aria-label="Add to favorites"
             >
               <Heart 
-                size={16} 
+                size={14} 
                 className={`transition-colors ${isFavorite ? "fill-red-500 text-red-500" : ""}`} 
               />
             </button>
@@ -82,7 +82,7 @@ function Imagegallery({
               className="p-2 bg-white/80 hover:bg-white bordered text-gray-700 hover:text-cyan-600 rounded-full shadow-sm backdrop-blur-sm transition-all transform hover:scale-105 active:scale-95"
               aria-label="Share product"
             >
-              <Share2 size={16} />
+              <Share2 size={14} />
             </button>
           </div>
 
