@@ -9,22 +9,15 @@ import { addToCart, addToFavorites } from "../store/cartSlice";
 import { useParams } from "react-router-dom";
 
 function Product() {
-
-  const  {id} = useParams();
+  const { id } = useParams();
   const { data = [] } = useVariations(id);
 
   const dispatch = useDispatch();
 
-
   const [currentGroupKey, setCurrentGroupKey] = usePersisted(
     "currentGroupKey",
-    () =>data?.[0]?.group_key ?? null,
+    () => data?.[0]?.group_key ?? null,
   );
-
-  
-
-
-
 
   const [currentVariationId, setCurrentVariationId] = usePersisted(
     "currentVariationId",
@@ -49,7 +42,7 @@ function Product() {
     if (!current?.items?.length) return null;
 
     return (
-      current.items.find((v) => v.id == currentVariationId ) || current.items[0]
+      current.items.find((v) => v.id == currentVariationId) || current.items[0]
     );
   }, [current, currentVariationId]);
 
@@ -131,8 +124,7 @@ function Product() {
     };
   }, [current, currentVariation]);
 
-  console.log("" , data);
-  
+  console.log("", data);
 
   const onShare = async (id) => {
     const { success } = await shareProduct(id);
@@ -150,10 +142,8 @@ function Product() {
 
   return (
     <>
-      
-
-      {current  && (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:py-6 ">
+      {current && (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3  md:py-6 ">
           <Imagegallery
             data={data}
             current_group={current}
@@ -259,19 +249,19 @@ function Product() {
             )}
 
             <button
-              className={`flex items-center rounded-lg bordered text-xs mx-2 mt-4 w-full transition-all
-    ${
-      currentVariation?.quantity === 0
-        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-        : "bg-cyan-600 text-white cursor-pointer"
-    }`}
+              className={`flex items-center  bordered text-xs ms-2  mt-4 w-[95%] bordered rounded-lg   transition-all
+                ${
+                  currentVariation?.quantity === 0
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-cyan-600 text-white cursor-pointer"
+                }`}
               onClick={handleAddToCart}
-              disabled={currentVariation?.quantity === 0} // 🟢 Disable button if stock drops to 0
+              disabled={currentVariation?.quantity === 0} // 🟢 
             >
               <p className="border-e-[1px] border-white p-3 bg-white text-cyan-600 rounded-s-lg">
-                {currentVariation.sell_price} ل.س{" "}
+                {currentVariation.sell_price} ل.س{" "} 
               </p>
-              <div className="mx-auto text-xs font-medium">
+              <div className="mx-auto text-xs ">
                 {currentVariation?.quantity === 0
                   ? "نفدت الكمية"
                   : "اضافة الى السلة"}
