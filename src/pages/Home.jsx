@@ -18,8 +18,8 @@ function Home() {
       setSubmitting(false);
     }
   };
-  const { data, isLoading, isFetched } = useFeatured();
-  console.log("", data);
+  // const { data, isLoading, isFetched } = useFeatured();
+  // console.log("", data);
 
   return (
     <>
@@ -66,7 +66,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="p-4 md:p-8 ">
+      {/* <section className="p-4 md:p-8 ">
         <span className="text-lg font-black leading-tight text-gray-900 md:text-xl">
           المنتجات المميزة
         </span>
@@ -87,7 +87,7 @@ function Home() {
               </div>
             ))}
         </div>
-      </section>
+      </section> */}
 
       <section className="relative overflow-hidden w-full bg-gray-50 ">
         <div className="   p-4 md:p-8   grid   md:grid-cols-2  items-center gap-y-12  ">
